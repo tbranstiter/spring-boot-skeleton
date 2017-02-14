@@ -38,4 +38,5 @@ public class UserController {
 		this.userService.save(user);
 		return "User successfully created with id = " + user.getId() + " and username = " + user.getUsername();
 	}
+	//
 }
