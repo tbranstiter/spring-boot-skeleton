@@ -1,3 +1,5 @@
+'use strict'
+
 var index = angular.module('index', ['ngRoute']);
 
 index.config(function($routeProvider) {
@@ -9,7 +11,7 @@ index.config(function($routeProvider) {
 
 index.controller('home', function($scope, $http) {
 
-		$scope.users = 
+		$scope.users = [ 
 			{
 				id: '1', 
 				username: 'tbranstiter'
@@ -19,6 +21,6 @@ index.controller('home', function($scope, $http) {
 			}, {
 				id: '3', 
 				username: 'tyler.branstiter'
-			}
+			}]
 
 	})
