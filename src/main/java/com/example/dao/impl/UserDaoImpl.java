@@ -33,15 +33,24 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public User getUser(long id) {
+	public User getUserById(long id) {
 		Query q = this.sessionFactory.openSession().createQuery("from User as u where u.id = :id");
 		q.setParameter("id", id);
 		return (User) q.uniqueResult();
 	}
 	
 	@Override
-	public void update(User user) {
-		Session session = sessionFactory.openSession();
-		session.update(user);
+	public void updateUser(User user) {
+		Query q = this.sessionFactory.openSession().createQuery("update User as u set u.password = :password where u.id = :id");
+		q.setParameter("id", user.getId());
+		q.setParameter("password", user.getPassword());
+		q.executeUpdate();
+	}
+	
+	@Override
+	public void deleteUserById(long id) {
+		Query q = this.sessionFactory.openSession().createQuery("delete from User as u where u.id = :id");
+		q.setParameter("id", id);
+		q.executeUpdate();
 	}
 }

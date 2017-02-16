@@ -7,7 +7,11 @@ import com.example.dto.User;
 public interface UserService {
 	List<User> getAllUsers();
 	
-	User getUser(long id);
+	User getUserById(long id);
 	
 	void save(User user);
+	
+	void deleteUserById(long id);
+	
+	void updateUser(User user);
 }
