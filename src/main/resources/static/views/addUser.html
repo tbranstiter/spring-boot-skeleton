@@ -14,6 +14,10 @@
 			float: right;
 		}
 		
+		.left-align {
+			float: left;
+		}
+		
 		.heading {
 			padding-top: 50px;
 		}
@@ -47,8 +51,9 @@
 			
 			<div class="form-group">
 				<label>Confirm Password</label>
-				<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Password" ng-model="user.confirmPassword" required compare-to="user.password" />
+				<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" ng-model="user.confirmPassword" required compare-to="user.password" />
 			</div>
+			<button type="button" class="btn btn-danger left-align" ng-click="redirectHome()">Back</button>
 			<button type="submit" class="btn btn-primary right-align">Submit</button>
 		</form>
 	</div>

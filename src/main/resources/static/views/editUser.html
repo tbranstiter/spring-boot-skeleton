@@ -1,0 +1,66 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+	<title>Change Password Page</title>
+	
+	<style type="text/css">
+
+		.container {
+			margin: auto;
+			width: 25%;
+		}
+		
+		.right-align {
+			float: right;
+		}
+		
+		.left-align {
+			float: left;	
+		}
+		
+		.heading {
+			padding-top: 50px;
+		}
+		
+		h3 {
+			color: red;
+			font-size: 1em;
+			font-style: italic;
+		}
+		
+	</style>
+	
+</head>
+
+<body>
+	<div class="container">
+		<div class="heading">
+			<h1>Create User</h1>
+		</div>
+		<h3>{{ message }}</h3>		
+		<form name="editUserForm" novalidate ng-submit="submitForm(editUserForm.$valid)">
+			<div class="form-group">
+				<label>Username</label>
+				<input type="text" class="form-control" id="username" name="username" placeholder="Get current logged in username and disable" ng-model="user.username" required />
+			</div>
+			
+			<div class="form-group">
+				<label>Current Password</label>
+				<input type="password" class="form-control" id="currentPassword" name="currentPassword" placeholder="Verify this is the correct password" ng-model="user.currentPassword" required />		
+			</div>
+			
+			<div class="form-group">
+				<label>New Password</label>
+				<input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New Password" ng-model="user.newPassword" required />
+			</div>
+			
+			<div class="form-group">
+				<label>Confirm Password</label>
+				<input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm New Password" ng-model="user.confirmNewPassword" required compare-to="user.newPassword" />
+			</div>
+			<button type="button" class="btn btn-danger left-align" ng-click="redirectHome()">Back</button>
+			<button type="submit" class="btn btn-primary right-align">Submit</button>
+		</form>
+	</div>	
+</body>
+</html>

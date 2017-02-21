@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['ngRoute','ngResource']);
+var app = angular.module('app', ['ngRoute']);
 
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
@@ -16,6 +16,10 @@ app.config(['$routeProvider', function($routeProvider) {
 			templateUrl: 'views/addUser.html',
 			controller: 'AddUserController' 
 		})
+		.when('/editUser', {
+			templateUrl: 'views/editUser.html',
+			controller: 'EditUserController' 
+		})
 		.otherwise({ redirectTo: '/' });
 	
 }]);
@@ -26,7 +30,7 @@ app.controller('HomeController', ['$scope', '$http', function($scope, $http) {
 	
 }]);
 
-app.controller('ListUsersController', ['$scope', '$http', function($scope, $http) {
+app.controller('ListUsersController', ['$scope', '$http', 'redirectService', function($scope, $http, redirectService) {
 		
 	$scope.users = [];
 	
@@ -39,32 +43,81 @@ app.controller('ListUsersController', ['$scope', '$http', function($scope, $http
 		})
 	})()
 	
+	$scope.redirectHome = function() {
+		redirectService.redirectHome();
+	}
+	
 }]);
 
-app.controller('AddUserController', ['$scope', '$http', function($scope, $http) {
+app.controller('AddUserController', ['$scope', '$http', 'redirectService', function($scope, $http, redirectService) {
 	
 	$scope.message = "";
 	
-	$scope.user = "";
-	
+	$scope.user = {
+			"username" : "",
+			"password" : "",
+			"confirmPassword" : ""
+	};
+		
 	$scope.submitForm = function(isValid) {
 		if(isValid) {
 			console.log($scope.user)			
-			$http.post('/api/users', $scope.user)
-				.success(function(data) {
-					console.log(data);
-				})
-				.error(function(data) {
-					alert("Failure Message: " + JSON.stringify({data: data}));
-				}); 
+			
+			$http({
+				method: 'POST',
+				url: '/api/users',
+				data: $scope.user,
+				headers: {
+					'Content-type': 'application/json'
+				}
+			})
+			.success(function (response) {
+				console.log(response);
+				    // not relevant
+			})
+			.error(function (error) {
+				console.log(error);
+			    // not relevant
+			});
 		} else {
 			$scope.message = "There are still invalid fields below!";
 		}
 	};
 	
+	$scope.redirectHome = function() {
+		redirectService.redirectHome();
+	}
+	
+}]);
+
+app.controller('EditUserController', ['$scope', '$http', 'redirectService', function($scope, $http, redirectService) {
+	
+	$scope.submitForm = function(isValid) {
+		if(isValid) {
+			console.log($scope.user)			
+			
+		} else {
+			$scope.message = "There are still invalid fields below!";
+		}
+	};
+	
+	$scope.redirectHome = function() {
+		redirectService.redirectHome();
+	}
+	
 }]);
 
 
+
+
+
+app.factory('redirectService', function($location) {
+	return {
+		redirectHome: function() {
+			$location.path("#/");
+		}
+	};
+});
 
 
 

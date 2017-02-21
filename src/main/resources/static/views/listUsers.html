@@ -4,6 +4,16 @@
 	<title>List Users Page</title>
 	
 	<style type="text/css">
+	
+		.container {
+			margin: auto;
+			width: 25%;
+		}
+		
+		.center {
+			margin: auto;
+			margin-top: 25px;
+		}
 		
 	</style>
 	
@@ -13,12 +23,16 @@
 	<div class="container text-center">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 style="color: red;">List of all the users:</h1>
+				<h1>List of all the users:</h1>
 			</div>
 		</div>	  
 		
 		<div ng-repeat="user in users" class="col-md-12">
 		    <p>Username: {{user.username}}</p>
+		</div>
+		
+		<div class="row">
+			<button type="button" class="btn btn-danger center" ng-click="redirectHome()">Back</button>
 		</div>
 	</div>
 </body>
